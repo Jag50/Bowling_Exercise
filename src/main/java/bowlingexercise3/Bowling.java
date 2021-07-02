@@ -5,17 +5,14 @@ public class Bowling {
     private int throww = 0;
     private int[] throwws = new int[28];
 
-    public void throww(String s) {
-    }
+    public void throwws(String total) {
 
-    public void throwws(String totalScore) {
+        for (int i=0; i< total.length(); i++) {
 
-        for (int i=0; i< totalScore.length(); i++) {
-
-            if (totalScore.charAt(i) == '|') {
+            if (total.charAt(i) == '|') {
 
             } else {
-                int x = totalScore.charAt(i);
+                int x = total.charAt(i);
                 throwws[throww++] = x - '0';
             }
         }
