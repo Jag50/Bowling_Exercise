@@ -31,4 +31,12 @@ public class BowlingTest {
         game.throwws("80|00");
         assertThat(game.score(), is(8));
     }
+
+    @Test
+    public void score_spare() {
+        Bowling game = new Bowling();
+        game.throwws("/0|00");
+        assertThat(game.score(), is(10));
+    }
+
 }
