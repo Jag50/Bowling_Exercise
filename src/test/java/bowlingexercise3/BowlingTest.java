@@ -14,10 +14,16 @@ public class BowlingTest {
     @Test
     public void score_spare() {
         Bowling game = new Bowling();
-        game.throwws("/0|00");
+        game.throwws("/0|-0");
         assertThat(game.score(), is(10));
     }
 
+    @Test
+    public void score_miss() {
+        Bowling game = new Bowling();
+        game.throwws("--|--");
+        assertThat(game.score(), is(00));
+    }
 
 
 }

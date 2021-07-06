@@ -16,7 +16,10 @@ public class Bowling {
             //Incorporates the addition of a spare (/) symbol
             } else if (total.charAt(i) == '/') {
                 throwws[throww++] = 10;
-            }  else {
+            //Incorporates the addition of a miss (-) symbol
+            }  else if (total.charAt(i) == '-') {
+                throwws[throww++] = 0;
+            } else {
                 int x = total.charAt(i);
                 throwws[throww++] = x - '0';
             }
