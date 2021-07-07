@@ -4,10 +4,10 @@ package bowlingexercise3;
 
 public class Bowling {
     //Determines the number of rolls and limits the frames to 10
-    private int throww = 0;
-    private int[] throwws = new int[24];
+    private int turn = 0;
+    private int[] turns = new int[24];
     //Reads string input
-    public void throwws(String total) {
+    public void turns(String total) {
 
         for (int i=0; i< total.length(); i++) {
             //Incorporates the addition/separation of the pipe (|) symbol
@@ -15,10 +15,10 @@ public class Bowling {
 
             //Incorporates the addition of a spare (/) symbol
             } else if (total.charAt(i) == '/') {
-                throwws[throww++] = 10;
+                turns[turn++] = 10;
             //Incorporates the addition of a miss (-) symbol
             }  else if (total.charAt(i) == '-') {
-                throwws[throww++] = 0;
+                turns[turn++] = 0;
             }
         }
     }
@@ -27,11 +27,9 @@ public class Bowling {
         int score = 0;
         int cursor = 0;
         for (int frame = 0; frame < 10; frame++) {
-            score += throwws[cursor] + throwws[cursor+1];
+            score += turns[cursor] + turns[cursor+1];
             cursor += 2;
         }
-
         return score;
     }
-
 }
