@@ -16,12 +16,17 @@ public class BowlingTest {
 
     @ParameterizedTest
 
-    @CsvSource(value = {"--|, 0", "1-|, 1", "11|, 2", "12|, 3", "4-|, 4","32|, 5","33|, 6",
-            "61|, 7","44|, 8","45|, 9","44|2-, 10", "-/|--, 10",
-            "-/|43|-/|-/|-/|-/|45|-/|-/, 86", "-/|-/|-/|-/|-/|-/|-/|7/|-/, 90",
-            "1/|-/|4/|9/|, 40"})
+    @CsvSource(value = {
 
-    public void testNumberToRoman1(String turns, int score) {
+            "--|, 0", "1-|, 1", "11|, 2", "12|, 3", "4-|, 4","32|, 5","33|, 6",
+            "61|, 7","44|, 8","45|, 9","44|2-, 10", "-/|--, 10",
+
+            "-/|43|-/|-/|-/|-/|45|-/|-/, 94",
+            "-/|9/|-/|-/|5/|-/|45|-/|-/, 107",
+            "-/|-/|-/|-/|-/|-/|-/|7/|-/, 97",
+            "1/|-/|4/|9/|, 53"})
+
+    public void testBowling(String turns, int score) {
         Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());

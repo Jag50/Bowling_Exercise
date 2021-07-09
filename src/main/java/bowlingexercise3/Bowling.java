@@ -10,14 +10,18 @@ public class Bowling {
     //Reads string input
     public void turns(String total) {
 
+
         for (int i = 0; i < total.length(); i++) {
             //Incorporates the addition/separation of the pipe (|) symbol
             if (total.charAt(i) == '|') {
 
+                //Incorporates the addition of a spare (/) symbol
+//            } else if (total.charAt(i) == '/') {
+//                turns[turn++] = 10;
                 //Incorporates the addition of a miss (-) symbol
             } else if (total.charAt(i) == '-') {
                 turns[turn++] = 0;
-                //Incorporates the addition of a spare (/) symbol
+
             } else if (total.charAt(i) == '/') {
                 int diff = 10 - turns[turn - 1];
                 turns[turn++] = diff;
@@ -31,17 +35,30 @@ public class Bowling {
 
     }
 
+    //Keeps the overall score
     public int score() {
 
+        //Initialising variable
         int score = 0;
+        //Initialising the pointer
         int cursor = 0;
+
+        //Keeping score by utilising the pointer and adding to the score and
+        // distinguishing it between a spare
         for (int frame = 0; frame < 10; frame++) {
 
-            score += turns[cursor] + turns[cursor + 1];
-            cursor += 2;
+            if (spare(cursor)) {
+                score += 10 + turns[cursor + 2];
+                cursor += 2;
+            } else {
+                score += turns[cursor] + turns[cursor + 1];
+                cursor += 2;
+            }
         }
-
         return score;
     }
 
+    private boolean spare(int cursor) {
+        return turns[cursor] + turns[cursor + 1] == 10;
+    }
 }
