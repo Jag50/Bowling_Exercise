@@ -16,13 +16,11 @@ public class Bowling {
             //Incorporates the addition/separation of the pipe (|) symbol
             if (total.charAt(i) == '|') {
 
-                //Incorporates the addition of a spare (/) symbol
-//            } else if (total.charAt(i) == '/') {
-//                turns[turn++] = 10;
+
                 //Incorporates the addition of a miss (-) symbol
             } else if (total.charAt(i) == '-') {
                 turns[turn++] = 0;
-
+                //Incorporates the addition of a spare (/) symbol
             } else if (total.charAt(i) == '/') {
                 int diff = 10 - turns[turn - 1];
                 turns[turn++] = diff;
