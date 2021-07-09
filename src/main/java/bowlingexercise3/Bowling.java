@@ -4,6 +4,7 @@ package bowlingexercise3;
 public class Bowling {
     //Determines the number of rolls and limits the frames to 10
     private int turn = 0;
+    //limits the frames
     private int[] turns = new int[24];
 
 
