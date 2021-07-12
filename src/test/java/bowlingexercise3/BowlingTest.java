@@ -62,6 +62,7 @@ public class BowlingTest {
 
             //Strike tests frames 1-9
             "X, 10",
+            "X|--, 10",
             "X|11|, 14",
             "X|5/|1-, 32",
             "X|X|X|22, 70",
