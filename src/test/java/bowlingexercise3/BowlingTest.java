@@ -68,7 +68,14 @@ public class BowlingTest {
             //Strike tests frames 1-9
             "X, 10",
             "X|11|, 14",
-            "X|5/|1-, 32"})
+            "X|5/|1-, 32",
+            "X|X|X|22, 70",
+            "X|43|-8|X|53|-4|45|-7|X, 88",
+            "X|43|X|X|X|X|45|X|X, 166",
+            "X|9/|X|X|52|X|45|X|X, 147",
+            "-/|17|X|-/|5/|X|X|9/|X, 153",
+            "-/|X|X|-/|-/|X|-/|7/|-/, 147",
+            "X|X|X|X|X|X|X|X|X, 240"})
 
     public void testBowlingStrikes(String turns, int score) {
         Bowling game = new Bowling();
