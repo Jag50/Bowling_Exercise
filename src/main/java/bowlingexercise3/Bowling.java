@@ -46,7 +46,7 @@ public class Bowling {
         // distinguishing it between a spare
         for (int frame = 0; frame < 10; frame++) {
 
-            if (Strike(cursor)) {
+            if (strike(cursor)) {
                 score += 10 + turns[cursor+1] + turns[cursor+2];
                 cursor ++;
             } else if (spare(cursor)) {
@@ -61,7 +61,7 @@ public class Bowling {
     }
 
     //Private Boolean created to keep track of pointers which correctly add scores
-    private boolean Strike(int cursor) {
+    private boolean strike(int cursor) {
         return turns[cursor] == 10;
     }
 
