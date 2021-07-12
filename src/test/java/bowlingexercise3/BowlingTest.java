@@ -46,6 +46,9 @@ public class BowlingTest {
 
             //Spare tests
             "-/, 10",
+            "-/|-/, 20",
+            "-/|-/|-/, 30",
+            "-/|-/|-/|-/, 40",
             "-/|43|-8|25|53|-4|45|-7|-/, 74",
             "-/|43|-/|-/|-/|-/|45|-/|-/, 94",
             "-/|9/|-/|-/|5/|-/|45|-/|-/, 107",
@@ -53,10 +56,32 @@ public class BowlingTest {
             "-/|-/|-/|-/|-/|-/|-/|7/|-/, 97",
             "1/|-/|4/|9/|, 53"})
 
-    public void testBowlingspares(String turns, int score) {
+    public void testBowlingSpares(String turns, int score) {
         Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+
+            //Spare tests
+            "X|, 10",
+            "X|X, 20",
+            "X|X|X, 30",
+            "-/|-/|-/|-/, 40",
+            "X|43|-8|X|53|-4|45|-7|-/, 74",
+            "-/|43|-/|-/|-/|-/|45|-/|-/, 94",
+            "-/|9/|-/|-/|5/|-/|45|-/|-/, 107",
+            "-/|9/|-/|-/|5/|-7|45|9/|-/, 100",
+            "-/|-/|-/|-/|-/|-/|-/|7/|-/, 97",
+            "1/|-/|4/|9/|, 53"})
+
+    public void testBowlingStrikes(String turns, int score) {
+        Bowling game = new Bowling();
+        game.turns(turns);
+        assertEquals(score, game.score());
+    }
+
 
 }
