@@ -66,7 +66,9 @@ public class BowlingTest {
     @CsvSource(value = {
 
             //Strike tests frames 1-9
-            "X, 10"})
+            "X, 10",
+            "X|11|, 14",
+            "X|5/|1-, 32"})
 
     public void testBowlingStrikes(String turns, int score) {
         Bowling game = new Bowling();
