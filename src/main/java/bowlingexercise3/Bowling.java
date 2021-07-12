@@ -1,33 +1,63 @@
 package bowlingexercise3;
 
+
 public class Bowling {
+    //Determines the number of rolls and limits the frames to 10
+    private int turn = 0;
+    //limits the frames
+    private int[] turns = new int[24];
 
-    private int throww = 0;
-    private int[] throwws = new int[28];
 
-    public void throwws(String total) {
+    //Reads string input
+    public void turns(String total) {
 
-        for (int i=0; i< total.length(); i++) {
 
+        for (int i = 0; i < total.length(); i++) {
+            //Incorporates the addition/separation of the pipe (|) symbol
             if (total.charAt(i) == '|') {
 
-            } else {
+
+                //Incorporates the addition of a miss (-) symbol
+            } else if (total.charAt(i) == '-') {
+                turns[turn++] = 0;
+                //Incorporates the addition of a spare (/) symbol
+            } else if (total.charAt(i) == '/') {
+                int diff = 10 - turns[turn - 1];
+                turns[turn++] = diff;
+            }
+            //Ensures numbers are added corrected
+            else {
                 int x = total.charAt(i);
-                throwws[throww++] = x - '0';
+                turns[turn++] = x - '0';
             }
         }
+
     }
 
+    //Keeps the overall score
     public int score() {
-        int score = 0;
-        int cursor = 0;
-        for (int frame = 0; frame < 10; frame++) {
-            score += throwws[cursor] + throwws[cursor+1];
-            cursor += 2;
-            }
 
+        //Initialising variable
+        int score = 0;
+        //Initialising the pointer
+        int cursor = 0;
+
+        //Keeping score by utilising the pointer and adding to the score and
+        // distinguishing it between a spare
+        for (int frame = 0; frame < 10; frame++) {
+
+            if (spare(cursor)) {
+                score += 10 + turns[cursor + 2];
+                cursor += 2;
+            } else {
+                score += turns[cursor] + turns[cursor + 1];
+                cursor += 2;
+            }
+        }
         return score;
     }
 
-
+    private boolean spare(int cursor) {
+        return turns[cursor] + turns[cursor + 1] == 10;
+    }
 }
