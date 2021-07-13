@@ -84,7 +84,9 @@ public class BowlingTest {
 
             //Testing strikes and spares for all 10 frames including bonus ball
             "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/, 100",
+            "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/-, 100",
             "X|X|X|X|X|X|X|X|X|XX, 290",
+            "X|X|X|X|X|X|X|X|X|XXX, 300",
     })
 
     public void testBowlingStrikeSpare10Frames(String turns, int score) {
