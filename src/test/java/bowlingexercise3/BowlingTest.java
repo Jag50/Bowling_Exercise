@@ -95,7 +95,4 @@ public class BowlingTest {
         assertEquals(score, game.score());
     }
 
-
-
-
 }

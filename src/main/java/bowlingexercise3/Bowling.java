@@ -54,7 +54,7 @@ public class Bowling {
 
         //Keeping score by utilising the pointer and adding to the score and
         // distinguishing it between a spare
-        for (int frame = 0; frame < 9; frame++) {
+        for (int frame = 0; frame < 10; frame++) {
 
             if (strike(cursor)) {
                 score += 10 + turns[cursor+1] + turns[cursor+2];
