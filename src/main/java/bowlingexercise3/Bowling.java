@@ -2,10 +2,20 @@ package bowlingexercise3;
 
 
 public class Bowling {
+
     //Determines the number of rolls and limits the frames to 10
     private int turn = 0;
     //limits the frames
     private int[] turns = new int[24];
+
+    //Private Boolean created to keep track of pointers which correctly add scores
+    private boolean strike(int cursor) {
+        return turns[cursor] == 10;
+    }
+
+    private boolean spare(int cursor) {
+        return turns[cursor] + turns[cursor + 1] == 10;
+    }
 
     //Reads string input
     public void turns(String total) {
@@ -58,15 +68,6 @@ public class Bowling {
             }
         }
         return score;
-    }
-
-    //Private Boolean created to keep track of pointers which correctly add scores
-    private boolean strike(int cursor) {
-        return turns[cursor] == 10;
-    }
-
-    private boolean spare(int cursor) {
-        return turns[cursor] + turns[cursor + 1] == 10;
     }
 
 }

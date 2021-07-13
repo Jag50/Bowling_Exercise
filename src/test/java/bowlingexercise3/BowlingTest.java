@@ -79,4 +79,20 @@ public class BowlingTest {
         assertEquals(score, game.score());
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {
+
+            //Testing strikes and spares for all 10 frames including bonus ball
+            "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/, 100",
+            "X|X|X|X|X|X|X|X|X|XX, 290",
+    })
+
+    public void testBowlingStrikeSpare10Frames(String turns, int score) {
+        Bowling game = new Bowling();
+        game.turns(turns);
+        assertEquals(score, game.score());
+    }
+
+
+
 }
