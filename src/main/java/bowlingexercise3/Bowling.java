@@ -68,4 +68,5 @@ public class Bowling {
     private boolean spare(int cursor) {
         return turns[cursor] + turns[cursor + 1] == 10;
     }
+
 }
