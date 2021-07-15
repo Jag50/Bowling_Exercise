@@ -1,9 +1,13 @@
 package bowlingexercise3;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BowlingTest {
 
@@ -83,10 +87,16 @@ public class BowlingTest {
     @CsvSource(value = {
 
             //Testing strikes and spares for all 10 frames including bonus ball
+            //Spare test with and without bonus ball
             "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/, 100",
             "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/-, 100",
+            //Strike test with and without bonus ball
             "X|X|X|X|X|X|X|X|X|XX, 290",
             "X|X|X|X|X|X|X|X|X|XXX, 300",
+            //Strike, spare and random number test
+            "-/|X|-/|X|-/|X|-/|X|-/|5/X, 195",
+            "X|-/|X|-/|X|-/|X|-/|X|-/X, 200",
+            "X|81|X|45|8/|X|X|7/|X|9/X, 183",
     })
 
     public void testBowlingStrikeSpare10Frames(String turns, int score) {
@@ -94,5 +104,24 @@ public class BowlingTest {
         game.turns(turns);
         assertEquals(score, game.score());
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+
+            //Testing boundary conditions
+            "//, Error",
+
+    })
+
+    public void boundaryConditions(String turns, String score) {
+        Bowling game = new Bowling();
+        try {
+            game.turns(turns);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        assertEquals(score, game.score());
+    }
+
 
 }

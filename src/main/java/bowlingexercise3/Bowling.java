@@ -17,9 +17,22 @@ public class Bowling {
         return turns[cursor] + turns[cursor + 1] == 10;
     }
 
-    //Reads string input
-    public void turns(String total) {
 
+
+    //Reads string input
+    public void turns(String total) throws IllegalArgumentException {
+
+        if (total.contains("//")) {
+            throw new IllegalArgumentException( "// is not allowed");
+        }
+
+        if (total.contains("///")) {
+            throw new IllegalArgumentException( "/// is not allowed");
+        }
+
+        if (total.contains("XXXX")){
+            throw new IllegalArgumentException("XXXX is not allowed");
+        }
 
         for (int i = 0; i < total.length(); i++) {
                 //Incorporates the addition of a Strike (/) symbol
@@ -52,8 +65,8 @@ public class Bowling {
         //Initialising the pointer
         int cursor = 0;
 
-        //Keeping score by utilising the pointer and adding to the score and
-        // distinguishing it between a spare
+        //Keeping score by utilising the pointer and adding to the score as it is
+        // distinguishing between a spare and strike
         for (int frame = 0; frame < 10; frame++) {
 
             if (strike(cursor)) {
