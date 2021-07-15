@@ -96,7 +96,7 @@ public class BowlingTest {
             //Strike, spare and random number test
             "-/|X|-/|X|-/|X|-/|X|-/|5/X, 195",
             "X|-/|X|-/|X|-/|X|-/|X|-/X, 200",
-            "X|81|X|45|8/|X|X|7/|X|9/X, 183",
+            "X|///|X|45|8/|X|X|7/|X|9/X, 183",
     })
 
     public void testBowlingStrikeSpare10Frames(String turns, int score) {
@@ -109,7 +109,9 @@ public class BowlingTest {
     @CsvSource(value = {
 
             //Testing boundary conditions
-            "//, Error",
+            "/, 10",
+            "X|81|X|45|8/|X|X||X|9/X, 183",
+            "X|///|X|45|8/|X|X||X|9/X, 183",
 
     })
 

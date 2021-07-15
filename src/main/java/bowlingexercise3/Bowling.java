@@ -22,16 +22,31 @@ public class Bowling {
     //Reads string input
     public void turns(String total) throws IllegalArgumentException {
 
-        if (total.contains("//")) {
-            throw new IllegalArgumentException( "// is not allowed");
-        }
-
         if (total.contains("///")) {
             throw new IllegalArgumentException( "/// is not allowed");
         }
 
+        if (total.contains("//")) {
+            throw new IllegalArgumentException( "// is not allowed");
+        }
         if (total.contains("XXXX")){
             throw new IllegalArgumentException("XXXX is not allowed");
+        }
+
+        if (total.contains("X/")) {
+            throw new IllegalArgumentException( "X/ is not allowed");
+        }
+
+        if (total.contains(",")) {
+            throw new IllegalArgumentException( ", is an invalid character");
+        }
+
+        if (total.contains(".")) {
+            throw new IllegalArgumentException( ". is an invalid character");
+        }
+
+        if (total.contains("")) {
+            throw new IllegalArgumentException( "Nothing is not allowed, need to enter a valid score");
         }
 
         for (int i = 0; i < total.length(); i++) {
