@@ -177,5 +177,4 @@ public class BowlingTest {
             assertEquals("incomplete turns", e.getMessage());
         }
     }
-
 }
