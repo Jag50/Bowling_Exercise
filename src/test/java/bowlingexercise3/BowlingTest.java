@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static junit.framework.TestCase.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -96,7 +97,7 @@ public class BowlingTest {
             //Strike, spare and random number test
             "-/|X|-/|X|-/|X|-/|X|-/|5/X, 195",
             "X|-/|X|-/|X|-/|X|-/|X|-/X, 200",
-            "X|///|X|45|8/|X|X|7/|X|9/X, 183",
+            "X|-/|X|45|8/|X|X|7/|X|9/X, 195",
     })
 
     public void testBowlingStrikeSpare10Frames(String turns, int score) {
@@ -109,21 +110,72 @@ public class BowlingTest {
     @CsvSource(value = {
 
             //Testing boundary conditions
-            "/, 10",
-            "X|81|X|45|8/|X|X||X|9/X, 183",
-            "X|///|X|45|8/|X|X||X|9/X, 183",
+
+            "--|--|--|--|--|--|--|--|--|-/, 10",
+            "--|--|--|--|--|--|--|--|--|-/X, 20",
+            "--|--|--|--|--|--|--|--|--|-/5, 15",
+
 
     })
 
-    public void boundaryConditions(String turns, String score) {
+    public void boundaryConditions(String turns, Integer score) {
         Bowling game = new Bowling();
         try {
             game.turns(turns);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
+            assertEquals("incomplete frames", e.getMessage());
         }
-        assertEquals(score, game.score());
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {
+            "",
+            "/",
+            "|",
+            "||||||||||",
+            "--------------------",
+    })
+    public void testInvalidFrames(String turns) {
+        Bowling game = new Bowling();
+        try {
+            game.turns(turns);
+            fail("test should have failed");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            assertEquals("incomplete frames", e.getMessage());
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+
+            "X|//////|X|45|8/|X|X||X|9/X, 183",
+            "X|///|X|45|8/|X|X||X|9/X, 183",
+            "X|XXXX|X|45|8/|X|X||X|9/X, 183",
+            "X|X/|X|45|8/|X|X||X|9/X, 183",
+            "X||X|45|8/|X|X||X|9/X, 183",
+            "X|81|X|45|8/|X|X||X|9/X, 183",
+            "01|11|11|11|11|11|11|11|11|11, 19",
+            "00|11|11|11|11|11|11|11|11|11, 18",
+            "10|11|11|11|11|11|11|11|11|11, 19",
+            "11|11|11|11|11|11|11|11|11|1//, 19",
+            "11|11|11|11|11|11|11|11|11|1X2, 19",
+            "11|11|11|11|11|11|11|11|11|1X/, 19",
+            "11|/1|11|11|11|11|11|11|11|1//, 19",
+            "11|11|11|11|11|11|11|11|11|/1, 19",
+            "11|11|11|11|11|11|11|11|11|1X, 19",
+            "11|11|11|11|11|11|11|11|11|X/1, 19",
+
+    })
+    public void testInvalidTurns(String turns) {
+        Bowling game = new Bowling();
+        try {
+            game.turns(turns);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            assertEquals("incomplete turns", e.getMessage());
+        }
+    }
 
 }
