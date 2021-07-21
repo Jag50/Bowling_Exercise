@@ -1,8 +1,10 @@
 package bowlingexercise3;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,14 +12,24 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
 public class BowlingTest {
 
     @ParameterizedTest
     @CsvSource(value = {
             //Some combinations of numbers to 10
-            "--|, 0", "1-|, 1", "11|, 2", "12|, 3",
-            "4-|, 4", "32|, 5", "33|, 6", "61|, 7",
-            "44|, 8", "45|, 9", "44|2-, 10"})
+            "--|, 0",
+            "1-|, 1",
+            "11|, 2",
+            "12|, 3",
+            "4-|, 4",
+            "32|, 5",
+            "33|, 6",
+            "61|, 7",
+            "44|, 8",
+            "45|, 9",
+            "44|2-, 10"
+    })
 
     public void testBowling1to9(String turns, int score) {
         Bowling game = new Bowling();
@@ -89,11 +101,11 @@ public class BowlingTest {
 
             //Testing strikes and spares for all 10 frames including bonus ball
             //Spare test with and without bonus ball
-            "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/, 100",
-            "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/-, 100",
+            "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/||8-, 108",
+            "-/|-/|-/|-/|-/|-/|-/|-/|-/|-/||-, 100",
             //Strike test with and without bonus ball
-            "X|X|X|X|X|X|X|X|X|XX, 290",
-            "X|X|X|X|X|X|X|X|X|XXX, 300",
+            "X|X|X|X|X|X|X|X|X|X||X, 290",
+            "X|X|X|X|X|X|X|X|X|X||XX, 300",
             //Strike, spare and random number test
             "-/|X|-/|X|-/|X|-/|X|-/|5/X, 195",
             "X|-/|X|-/|X|-/|X|-/|X|-/X, 200",
@@ -111,14 +123,13 @@ public class BowlingTest {
 
             //Testing boundary conditions
 
-            "--|--|--|--|--|--|--|--|--|-/, 10",
-            "--|--|--|--|--|--|--|--|--|-/X, 20",
-            "--|--|--|--|--|--|--|--|--|-/5, 15",
-
+            "--|--|--|--|--|--|--|--|--|-/||-",
+            "--|--|--|--|--|--|--|--|--|-/||X",
+            "--|--|--|--|--|--|--|--|--|-/||5",
 
     })
 
-    public void boundaryConditions(String turns, Integer score) {
+    public void boundaryConditionsSpare(String turns) {
         Bowling game = new Bowling();
         try {
             game.turns(turns);
@@ -128,13 +139,22 @@ public class BowlingTest {
         }
     }
 
+    //Separate test for nothing, ""
+    @Test
+    public void testInvalidFramesNothing() {
+        Bowling game = new Bowling();
+        Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(""));
+        assertEquals("incomplete frames", e.getMessage());
+    }
+
     @ParameterizedTest
+    @EmptySource
     @CsvSource(value = {
-            "",
             "/",
             "|",
             "||||||||||",
-            "--------------------",
+            "------------------",
+            "--|--|--|--|--|--|--|--|--|-/||1",
     })
     public void testInvalidFrames(String turns) {
         Bowling game = new Bowling();
@@ -147,34 +167,51 @@ public class BowlingTest {
         }
     }
 
+
     @ParameterizedTest
     @CsvSource(value = {
 
-            "X|//////|X|45|8/|X|X||X|9/X, 183",
-            "X|///|X|45|8/|X|X||X|9/X, 183",
-            "X|XXXX|X|45|8/|X|X||X|9/X, 183",
-            "X|X/|X|45|8/|X|X||X|9/X, 183",
-            "X||X|45|8/|X|X||X|9/X, 183",
-            "X|81|X|45|8/|X|X||X|9/X, 183",
-            "01|11|11|11|11|11|11|11|11|11, 19",
-            "00|11|11|11|11|11|11|11|11|11, 18",
-            "10|11|11|11|11|11|11|11|11|11, 19",
-            "11|11|11|11|11|11|11|11|11|1//, 19",
-            "11|11|11|11|11|11|11|11|11|1X2, 19",
-            "11|11|11|11|11|11|11|11|11|1X/, 19",
-            "11|/1|11|11|11|11|11|11|11|1//, 19",
-            "11|11|11|11|11|11|11|11|11|/1, 19",
-            "11|11|11|11|11|11|11|11|11|1X, 19",
-            "11|11|11|11|11|11|11|11|11|X/1, 19",
+            "X|//////|X|45|8/|X|X||X|9/X",
+            "X|///|X|45|8/|X|X||X|9/X",
+            "X|XXXX|X|45|8/|X|X||X|9/X",
+            "X|X/|X|45|8/|X|X||X|9/X",
+            "X||X|45|8/|X|X||X|9/X",
+            "X|81|X|45|8/|X|X||X|9/X",
+            // frames 1-9
+            "11|11|11|11|11|/1|11|11|11",
+            "11|11|11|11|11|1X|11|11|11",
+            "1111888|11|11|11|11|11|11|11|11",
+            "1X?X|11|11|11|11|11|11|11|11",
+
+            "01|11|11|11|11|11|11|11|11|11",
+            "00|11|11|11|11|11|11|11|11|11",
+            "10|11|11|11|11|11|11|11|11|11",
+            "11|11|11|11|11|11|11|11|11|1//",
+            "H1|11|11|11|11|11|11|11|11|1/",
+            "11|11|11|11|11|11|11|11|1X2|11",
+            "11|11|11|11|11|11|11|11|11|1X2",
+            "11|11|11|11|11|11|11|11|11|1X/",
+            "11|/1|11|11|11|11|11|11|11|1//",
+            "11|11|11|11|11|11|11|11|11|/1",
+            "11|11|11|11|11|11|11|11|11|1X",
+            "11|11|11|11|11|11|11|11|11|X/1",
+//            "X|X|X|X|X|X|X|X|X|XXX",
+//            "X|X|81|X|X|X|X|X|X|XXX",
 
     })
     public void testInvalidTurns(String turns) {
-        Bowling game = new Bowling();
-        try {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            //Code under test
+            Bowling game = new Bowling();
             game.turns(turns);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            assertEquals("incomplete turns", e.getMessage());
-        }
+            try {
+                game.turns(turns);
+                fail("test should have failed");
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                assertEquals("invalid turns", e.getMessage());
+            }
+        });
     }
 }
