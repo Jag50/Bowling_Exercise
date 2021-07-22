@@ -11,15 +11,17 @@ public class Bowling {
     //Determines the number of rolls and limits the frames to 10
     private int turn = 0;
     //limits the frames
-    private int[] turns = new int[30];
+    private int[] turns = new int[24];
     private Pattern pattern;
     private Matcher matcher;
     private Pattern patterns;
     private Pattern patternss;
-    private static String REGEX_NO_STRIKES = "([- 1-9X][-123456789/]){10}";
-    private static String REGEX_STRIKES = "[X][|]";
-    private static String REGEX_TENTH_FRAME_STRIKE = "[-123456789X][-123456789X]";
-    private static String REGEX_TENTH_FRAME_SPARE = "[-123456789X]";
+    private static String REGEX_NO_STRIKES = "(([-1-9X][-123456789/]|X)\\|){10}\\|";
+    private static String REGEX_STRIKES = "([-1-9X][-123456789/]){10}\\|";
+    private static String REGEX_BONUS_TENTH_FRAME_NO_STRIKE = "((?<=X\\|{2})[-123456789X])";
+    private static String REGEX_BONUS_TENTH_FRAME_STRIKE = "((?<=X\\|{2})[- 1-9X] [- 1-9X])";
+    private static String REGEX_FULL_EXPR = REGEX_NO_STRIKES + "(" + REGEX_STRIKES + "|" + REGEX_BONUS_TENTH_FRAME_NO_STRIKE + "|" + REGEX_BONUS_TENTH_FRAME_STRIKE + ")";
+    private static Pattern REGEX_VALID_FULL = Pattern.compile(REGEX_FULL_EXPR);
 
 
     //Private Boolean created to keep track of pointers which correctly add scores
@@ -31,51 +33,10 @@ public class Bowling {
         return turns[cursor] + turns[cursor + 1] == 10;
     }
 
-
     //Reads string input
     public void turns(String total) throws IllegalArgumentException {
 
-//        if (total.contains("///")) {
-//            throw new IllegalArgumentException( "/// is not allowed");
-//        }
-//
-//        if (total.contains("//")) {
-//            throw new IllegalArgumentException( "// is not allowed");
-//        }
-//        if (total.contains("XXXX")){
-//            throw new IllegalArgumentException("XXXX is not allowed");
-//        }
-//
-//        if (total.contains("X/")) {
-//            throw new IllegalArgumentException( "X/ is not allowed");
-//        }
-//
-//        if (total.contains("||")) {
-//            throw new IllegalArgumentException( "|| is not allowed");
-//        }
-//
-//        if (total.contains("//|")) {
-//            throw new IllegalArgumentException("//| is not allowed");
-//        }
-//
-//        if (total.contains("|/|")) {
-//            throw new IllegalArgumentException("|/| is not allowed");
-//        }
-//
-//        if (total.contains("---")) {
-//            throw new IllegalArgumentException("--- is not allowed");
-//        }
-//
-//        if (total.contains(",")) {
-//            throw new IllegalArgumentException( ", is an invalid character");
-//        }
-//
-//        if (total.contains(".")) {
-//            throw new IllegalArgumentException( ". is an invalid character");
-//        }
-
-
-        validateInput(total);
+     validateInput(total);
 
 
         for (int i = 0; i < total.length(); i++) {
@@ -130,34 +91,41 @@ public class Bowling {
     private void validateInput(String input) throws IllegalArgumentException {
 
         //should have 10 frames
-        List<String> frames = Arrays.asList(input.split("\\|"));
+       List<String> frames = Arrays.asList(input.split("\\|"));
+        Matcher matcherInput = REGEX_VALID_FULL.matcher(input);
 
-        if (frames.size() != 12) {
-            throw new IllegalArgumentException("incomplete frames");
-        } else {
-            frames.forEach(frame -> {
-                if (frame.startsWith("X")) {
+        if (!matcherInput.matches()) {
 
-                } else if (frame.length() != 0 && frame.length() != 2 && frame.length() != 1 && frame.length() != 3 ) {
-                    throw new IllegalArgumentException("incorrect number of turns");
-                }
-                else {
-                    frame.chars().forEach(ball -> {
-                        pattern = Pattern.compile(REGEX_NO_STRIKES);
-                        patterns = Pattern.compile(REGEX_STRIKES);
-                        patternss = Pattern.compile(REGEX_TENTH_FRAME_STRIKE);
-                        matcher = pattern.matcher(frame);
-
-                        if (!matcher.matches()) {
-                            throw new IllegalArgumentException(frame + " input must be one of " + REGEX_NO_STRIKES);
-                        }
-
-                    });
-                }
-
-
-            });
+            throw new IllegalArgumentException("Input isn't valid");
         }
+
+
+//        if (frames.size() != 12) {
+//            throw new IllegalArgumentException("incomplete frames");
+//        } else {
+//            frames.forEach(frame -> {
+//                if (frame.startsWith("X")) {
+//
+//                } else if (frame.length() != 0 && frame.length() != 2 && frame.length() != 1 && frame.length() != 3 ) {
+//                    throw new IllegalArgumentException("incorrect number of turns");
+//                }
+//                else {
+//                    frame.chars().forEach(ball -> {
+//                        pattern = Pattern.compile(REGEX_NO_STRIKES);
+//                        patterns = Pattern.compile(REGEX_STRIKES);
+//                        patternss = Pattern.compile(REGEX_TENTH_FRAME_STRIKE);
+//                        matcher = pattern.matcher(frame);
+//
+//                        if (!matcher.matches()) {
+//                            throw new IllegalArgumentException(frame + " input must be one of " + REGEX_NO_STRIKES);
+//                        }
+//
+//                    });
+//                }
+//
+//
+//            });
+//        }
 
 //        if (total.contains(" ")) {
 //            throw new IllegalArgumentException( "Nothing is not allowed, need to enter a valid score");

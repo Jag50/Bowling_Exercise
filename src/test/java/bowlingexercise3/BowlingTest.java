@@ -140,12 +140,12 @@ public class BowlingTest {
     }
 
     //Separate test for nothing, ""
-    @Test
-    public void testInvalidFramesNothing() {
-        Bowling game = new Bowling();
-        Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(""));
-        assertEquals("incomplete frames", e.getMessage());
-    }
+//    @Test
+//    public void testInvalidFramesNothing() {
+//        Bowling game = new Bowling();
+//        Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(""));
+//        assertEquals("incomplete frames", e.getMessage());
+//    }
 
     @ParameterizedTest
     @EmptySource
@@ -156,15 +156,14 @@ public class BowlingTest {
             "------------------",
             "--|--|--|--|--|--|--|--|--|-/||1",
     })
+
+
     public void testInvalidFrames(String turns) {
         Bowling game = new Bowling();
-        try {
-            game.turns(turns);
-            fail("test should have failed");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+
+
+            Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
             assertEquals("incomplete frames", e.getMessage());
-        }
     }
 
 
@@ -195,11 +194,38 @@ public class BowlingTest {
             "11|11|11|11|11|11|11|11|11|/1",
             "11|11|11|11|11|11|11|11|11|1X",
             "11|11|11|11|11|11|11|11|11|X/1",
-//            "X|X|X|X|X|X|X|X|X|XXX",
-//            "X|X|81|X|X|X|X|X|X|XXX",
 
     })
     public void testInvalidTurns(String turns) {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            //Code under test
+            Bowling game = new Bowling();
+            game.turns(turns);
+            try {
+                game.turns(turns);
+                fail("test should have failed");
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                assertEquals("invalid turns", e.getMessage());
+            }
+        });
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+
+
+            "11|11|11|11|11|11|11|11|11|11||1",
+            "11|11|11|11|11|11|11|11|11|11||1",
+            "11|11|11|11|11|11|11|11|11|11||1",
+            "11|11|11|11|11|11|11|11|11|11||1",
+            "11|11|11|11|11|11|11|11|11|11||1",
+
+    })
+
+
+    public void testInvalidBonusTurns(String turns) {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             //Code under test
