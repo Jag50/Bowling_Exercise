@@ -17,7 +17,7 @@ public class Bowling {
     private Pattern patterns;
     private Pattern patternss;
     //"(([-123456789][-123456789/]|[X])\\|){10}";
-    private static String REGEX_SPARES_STRIKES = "([-1-9][-1-9]\\|){10}\\|";
+    private static String REGEX_SPARES_STRIKES = "(([-1-9X][-1-9/]|[X])\\|){10}\\|";
     private static Pattern REGEX_VALID_FULL = Pattern.compile(REGEX_SPARES_STRIKES);
 
 
