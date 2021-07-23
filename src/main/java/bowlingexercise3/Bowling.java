@@ -16,12 +16,9 @@ public class Bowling {
     private Matcher matcher;
     private Pattern patterns;
     private Pattern patternss;
-    private static String REGEX_NO_STRIKES = "(([-1-9X][-123456789/]|X)\\|){10}\\|";
-    private static String REGEX_STRIKES = "([-1-9X][-123456789/]){10}\\|";
-    private static String REGEX_BONUS_TENTH_FRAME_NO_STRIKE = "((?<=X\\|{2})[-123456789X])";
-    private static String REGEX_BONUS_TENTH_FRAME_STRIKE = "((?<=X\\|{2})[- 1-9X] [- 1-9X])";
-    private static String REGEX_FULL_EXPR = REGEX_NO_STRIKES + "(" + REGEX_STRIKES + "|" + REGEX_BONUS_TENTH_FRAME_NO_STRIKE + "|" + REGEX_BONUS_TENTH_FRAME_STRIKE + ")";
-    private static Pattern REGEX_VALID_FULL = Pattern.compile(REGEX_FULL_EXPR);
+    //"(([-123456789][-123456789/]|[X])\\|){10}";
+    private static String REGEX_SPARES_STRIKES = "([-1-9][-1-9]\\|){10}\\|";
+    private static Pattern REGEX_VALID_FULL = Pattern.compile(REGEX_SPARES_STRIKES);
 
 
     //Private Boolean created to keep track of pointers which correctly add scores
@@ -36,7 +33,7 @@ public class Bowling {
     //Reads string input
     public void turns(String total) throws IllegalArgumentException {
 
-     validateInput(total);
+        validateInput(total);
 
 
         for (int i = 0; i < total.length(); i++) {
@@ -59,6 +56,22 @@ public class Bowling {
                 turns[turn++] = x - '0';
             }
         }
+
+    }
+
+    private void validateInput(String input) throws IllegalArgumentException {
+
+        //should have 10 frames
+        // List<String> frames = Arrays.asList(input.split("\\|"));
+        Matcher matcherInput = REGEX_VALID_FULL.matcher(input);
+
+        if (!matcherInput.matches()) {
+
+            throw new IllegalArgumentException("Input isn't valid");
+        }
+//            else {
+//                throw new IllegalArgumentException("Input isn't valid");
+//            }
 
     }
 
@@ -87,17 +100,6 @@ public class Bowling {
         }
         return score;
     }
-
-    private void validateInput(String input) throws IllegalArgumentException {
-
-        //should have 10 frames
-       List<String> frames = Arrays.asList(input.split("\\|"));
-        Matcher matcherInput = REGEX_VALID_FULL.matcher(input);
-
-        if (!matcherInput.matches()) {
-
-            throw new IllegalArgumentException("Input isn't valid");
-        }
 
 
 //        if (frames.size() != 12) {
@@ -131,6 +133,5 @@ public class Bowling {
 //            throw new IllegalArgumentException( "Nothing is not allowed, need to enter a valid score");
 //        }
 
-    }
 
 }
