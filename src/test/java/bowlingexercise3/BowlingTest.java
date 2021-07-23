@@ -286,7 +286,6 @@ public class BowlingTest {
             "9/|9/|9/|9/|9/|9/|9/|9/|9/|9/||",
             "1/|1/|3/|4/|5/|6/|7/|7/|8/|9/||",
 
-
     })
     public void testValidInputSpare(String turns) {
 
@@ -298,10 +297,11 @@ public class BowlingTest {
     @CsvSource(value = {
 
             "X|X|X|X|X|X|X|X|X|X||",
-            "X|11|11|11|11|11|11|11|11||",
+            "X|11|11|11|11|11|11|11|11|11||",
             "X|11|X|11|X|11|X|11|X|11||",
             "X|11|11|11|X|X|X|X|X|X||",
             "X|12|23|X|X|X|9-|X|X|X||",
+            "X|11|11|11|11|11|11|11|X|X||",
 
 
 
