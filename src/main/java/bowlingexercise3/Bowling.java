@@ -16,9 +16,14 @@ public class Bowling {
     private Matcher matcher;
     private Pattern patterns;
     private Pattern patternss;
-    //"(([-123456789][-123456789/]|[X])\\|){10}";
-    private static String REGEX_SPARES_STRIKES = "(([-1-9X][-1-9/]|[X])\\|){10}\\|";
-    private static Pattern REGEX_VALID_FULL = Pattern.compile(REGEX_SPARES_STRIKES);
+    // Regular Expressions
+    private static String REGEX_SPARES_STRIKES = "(([-1-9][-1-9/]|[X])\\|){10}\\|";
+    private static String REGEX_BONUS = "$";
+    private static String REGEX_BONUS_SPARE = "(?<=/\\|\\|[- 1-9X])";
+    private static String REGEX_BONUS_STRIKE = "(?<=X\\|\\|)(XX|X[- 1-9]|[- 1-9][- 1-9/])";
+    private static String REGEX_VALID_FULL = REGEX_SPARES_STRIKES + "(" + REGEX_BONUS + "|" + REGEX_BONUS_SPARE + "|" + REGEX_BONUS_STRIKE + ")";
+    private static Pattern REGEX_VALID_EXP = Pattern.compile(REGEX_VALID_FULL);
+
 
 
     //Private Boolean created to keep track of pointers which correctly add scores
@@ -63,15 +68,12 @@ public class Bowling {
 
         //should have 10 frames
         // List<String> frames = Arrays.asList(input.split("\\|"));
-        Matcher matcherInput = REGEX_VALID_FULL.matcher(input);
+        Matcher matcherInput = REGEX_VALID_EXP.matcher(input);
 
         if (!matcherInput.matches()) {
 
             throw new IllegalArgumentException("Input isn't valid");
         }
-//            else {
-//                throw new IllegalArgumentException("Input isn't valid");
-//            }
 
     }
 
@@ -100,38 +102,4 @@ public class Bowling {
         }
         return score;
     }
-
-
-//        if (frames.size() != 12) {
-//            throw new IllegalArgumentException("incomplete frames");
-//        } else {
-//            frames.forEach(frame -> {
-//                if (frame.startsWith("X")) {
-//
-//                } else if (frame.length() != 0 && frame.length() != 2 && frame.length() != 1 && frame.length() != 3 ) {
-//                    throw new IllegalArgumentException("incorrect number of turns");
-//                }
-//                else {
-//                    frame.chars().forEach(ball -> {
-//                        pattern = Pattern.compile(REGEX_NO_STRIKES);
-//                        patterns = Pattern.compile(REGEX_STRIKES);
-//                        patternss = Pattern.compile(REGEX_TENTH_FRAME_STRIKE);
-//                        matcher = pattern.matcher(frame);
-//
-//                        if (!matcher.matches()) {
-//                            throw new IllegalArgumentException(frame + " input must be one of " + REGEX_NO_STRIKES);
-//                        }
-//
-//                    });
-//                }
-//
-//
-//            });
-//        }
-
-//        if (total.contains(" ")) {
-//            throw new IllegalArgumentException( "Nothing is not allowed, need to enter a valid score");
-//        }
-
-
 }
