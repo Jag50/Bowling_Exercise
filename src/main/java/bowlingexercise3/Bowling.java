@@ -59,8 +59,6 @@ public class Bowling {
 
     private void validateInput(String input) throws IllegalArgumentException {
 
-        //should have 10 frames
-        // List<String> frames = Arrays.asList(input.split("\\|"));
         Matcher matcherInput = REGEX_VALID_EXP.matcher(input);
 
         if (!matcherInput.matches()) {

@@ -411,7 +411,6 @@ public class BowlingTest {
     public void testInvalidInputBonusFrames(String turns) {
 
         Bowling game = new Bowling();
-//        Assertions.assertDoesNotThrow(() -> game.turns(turns));
         Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
         assertEquals("Input isn't valid", e.getMessage());
     }
