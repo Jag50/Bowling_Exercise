@@ -1,8 +1,5 @@
 package bowlingexercise3;
 
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,14 +9,10 @@ public class Bowling {
     private int turn = 0;
     //limits the frames
     private int[] turns = new int[24];
-    private Pattern pattern;
-    private Matcher matcher;
-    private Pattern patterns;
-    private Pattern patternss;
     // Regular Expressions
     private static String REGEX_SPARES_STRIKES = "(([-1-9][-1-9/]|[X])\\|){10}\\|";
     private static String REGEX_BONUS = "$";
-    private static String REGEX_BONUS_SPARE = "(?<=/\\|\\|[- 1-9X])";
+    private static String REGEX_BONUS_SPARE = "(?<=/\\|\\|)([- 1-9X])";
     private static String REGEX_BONUS_STRIKE = "(?<=X\\|\\|)(XX|X[- 1-9]|[- 1-9][- 1-9/])";
     private static String REGEX_VALID_FULL = REGEX_SPARES_STRIKES + "(" + REGEX_BONUS + "|" + REGEX_BONUS_SPARE + "|" + REGEX_BONUS_STRIKE + ")";
     private static Pattern REGEX_VALID_EXP = Pattern.compile(REGEX_VALID_FULL);
