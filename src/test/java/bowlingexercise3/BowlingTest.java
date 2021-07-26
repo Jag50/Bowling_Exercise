@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.EmptySource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//branch from master and making changes, another branch merging into master where changing lines of code in the same place, see what  happens
 
 public class BowlingTest {
 
@@ -156,7 +157,7 @@ public class BowlingTest {
             "--|--|--|--|--|--|--|--|--|-/||5",
     })
 
-    public void boundaryConditionsSpareBonusBallTest(String turns) {
+    public void assertValidInputForSpareBonusBallTest(String turns) {
         Bowling game = new Bowling();
         Assertions.assertDoesNotThrow(() -> game.turns(turns));
     }
@@ -165,42 +166,27 @@ public class BowlingTest {
     @ParameterizedTest
     @CsvSource(value = {
 
-            "X|//////|X|45|8/|X|X||X||9/X",
-            "X|///|X|45|8/|X|X||X||9/X",
-            "X|XXXX|X|45|8/|X|X||X||9/X",
-            "X|X/|X|45|8/|X|X||X||9/X",
-            "X||X|45|8/|X|X||X|9/X",
-            "X|81|X|45|8/|X|X||X|9/X",
-            "11|11|11|11|11|/1|11|11|11",
-            "11|11|11|11|11|1X|11|11|11",
-            "1111888|11|11|11|11|11|11|11|11",
-            "1X?X|11|11|11|11|11|11|11|11",
+            "X|//////|X|45|8/|X|X||X||9/|33||",
+            "X|///|X|45|8/|X|X||X||9/|11||",
+            "X|XXXX|X|45|8/|X|X||X||9||/||",
+            "X|X/|X|45|8/|X|X||X||9/||X",
+            "X||X|45|8/|X|X||X|9/|X|X|9-||",
+            "X|81|X|45|8/|X|X||X|9/X||",
+            "11|11|11|11|11|/1|11|11|11||",
+            "11|11|11|11|11|1X|11|11|11||",
+            "1111888|11|11|11|11|11|11|11|11||",
+            "1X?X|11|11|11|11|11|11|11|11||",
             "00|11|11|11|11|11|11|11|11|11||",
             "10|11|11|11|11|11|11|11|11|11||",
             "11|11|11|11|11|11|11|11|11|1//||",
             "H1|11|11|11|11|11|11|11|11|1/||",
             "11|11|11|11|11|11|11|11|1X2|11||",
             "11|11|11|11|11|11|11|11|11|1X2||",
-            "11|11|11|11|11|11|11|11|11|1X||/",
-            "11|/1|11|11|11|11|11|11|11|1/||/",
+            "11|11|11|11|11|11|11|11|11|1X||",
+            "11|/1|11|11|11|11|11|11|11|1/||",
             "11|11|11|11|11|11|11|11|11|/1||",
             "11|11|11|11|11|11|11|11|11|1X||",
-            "11|11|11|11|11|11|11|11|11|X/||1",
-
-    })
-
-    public void testInvalidInput(String turns) {
-
-        Bowling game = new Bowling();
-        Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
-        assertEquals("Input isn't valid", e.getMessage());
-    }
-
-    @ParameterizedTest
-    @EmptySource
-    @CsvSource(value = {
-
-
+            "11|11|11|11|11|11|11|11|11|X/||",
             "/",
             "|",
             "||||||||||",
@@ -223,6 +209,22 @@ public class BowlingTest {
             "11|11|11|11|11|11|11|11|-X|11||",
             "///|11|22|11|11|//|11|11|11|11||",
             "11|11|45|11|11|11|11|11|-X|11||",
+
+    })
+
+    public void testInvalidInputForFrames1to10(String turns) {
+
+        Bowling game = new Bowling();
+        Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
+        assertEquals("Input isn't valid", e.getMessage());
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    @CsvSource(value = {
+
+
+
             "X|X|X|X|X|X|X|X|X|XX||",
             "X|X|X|X|X|X|X|X|X|XXX||",
             "5|X|X|X|X|X|X|X|X|X||",
@@ -237,7 +239,7 @@ public class BowlingTest {
 
 
     })
-    public void TestingInvalidInput(String turns) {
+    public void furtherTestingOfInvalidInputContainingStrikes(String turns) {
 
         Bowling game = new Bowling();
         Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
@@ -285,7 +287,7 @@ public class BowlingTest {
 
 
     })
-    public void testingValidInputNormalFrames(String turns) {
+    public void testingValidInputNormalFrames1to10(String turns) {
 
         Bowling game = new Bowling();
         Assertions.assertDoesNotThrow(() -> game.turns(turns));
@@ -321,9 +323,9 @@ public class BowlingTest {
             "X|X|X|X|X|X|X|X|X|X||",
             "X|11|11|11|11|11|11|11|11|11||",
             "X|11|X|11|X|11|X|11|X|11||",
-            "X|11|11|11|X|X|X|X|X|X||",
-            "X|12|23|X|X|X|9-|X|X|X||",
-            "X|11|11|11|11|11|11|11|X|X||",
+            "X|11|11|11|X|X|X|X|X|51||",
+            "X|12|23|X|X|X|9-|X|X|61||",
+            "X|11|11|11|11|11|11|11|X|81||",
 
 
 
@@ -337,12 +339,12 @@ public class BowlingTest {
     @ParameterizedTest
     @CsvSource(value = {
 
-            "X|-/|X|-/|X|-/|X|-/|X|-/||",
-            "12|-/|X|-/|X|-/|X|-/|X|-/||",
-            "X|34|X|-/|X|-/|X|-/|X|-/||",
-            "X|-/|54|-/|X|-/|X|-/|X|-/||",
-            "X|-/|1/|-/|X|-/|X|-/|X|-/||",
-            "X|-/|X|-/|X|9/|X|-/|X|-/||",
+            "X|-/|X|-/|X|-/|X|-/|X|--||",
+            "12|-/|X|-/|X|-/|X|-/|X|--||",
+            "X|34|X|-/|X|-/|X|-/|X|--||",
+            "X|-/|54|-/|X|-/|X|-/|X|--||",
+            "X|-/|1/|-/|X|-/|X|-/|X|--||",
+            "X|-/|X|-/|X|9/|X|-/|X|--||",
 
 
     })
