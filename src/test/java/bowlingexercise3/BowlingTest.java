@@ -48,7 +48,7 @@ public class BowlingTest {
 
     })
 
-    public void testBowlingScore10AndMore(String turns, int score) {
+    public void testBowlingScore10AndMoreInNormal10Frames(String turns, int score) {
         Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());
@@ -139,8 +139,6 @@ public class BowlingTest {
             "--|--|--|--|--|--|--|--|--|-/||9",
             "--|--|--|--|--|--|--|--|--|-/||X",
             "--|--|--|--|--|--|--|--|--|-/||5",
-
-
     })
 
     public void boundaryConditionsSpareBonusBallTest(String turns) {
@@ -174,8 +172,8 @@ public class BowlingTest {
             "11|11|11|11|11|11|11|11|11|1X||",
             "11|11|11|11|11|11|11|11|11|X/||1",
 
-
     })
+
     public void testInvalidInput(String turns) {
 
         Bowling game = new Bowling();
