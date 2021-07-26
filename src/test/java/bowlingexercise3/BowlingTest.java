@@ -171,22 +171,7 @@ public class BowlingTest {
             "11|/1|11|11|11|11|11|11|11|1/||",
             "11|11|11|11|11|11|11|11|11|/1||",
             "11|11|11|11|11|11|11|11|11|1X||",
-            "11|11|11|11|11|11|11|11|11|X/||"
-
-    })
-
-    public void testInvalidInputForFrames1to10(String turns) {
-
-        Bowling game = new Bowling();
-        Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
-        assertEquals("Input isn't valid", e.getMessage());
-    }
-
-    @ParameterizedTest
-    @EmptySource
-    @CsvSource(value = {
-
-
+            "11|11|11|11|11|11|11|11|11|X/||",
             "/",
             "|",
             "||||||||||",
@@ -209,6 +194,22 @@ public class BowlingTest {
             "11|11|11|11|11|11|11|11|-X|11||",
             "///|11|22|11|11|//|11|11|11|11||",
             "11|11|45|11|11|11|11|11|-X|11||",
+
+    })
+
+    public void testInvalidInputForFrames1to10(String turns) {
+
+        Bowling game = new Bowling();
+        Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
+        assertEquals("Input isn't valid", e.getMessage());
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    @CsvSource(value = {
+
+
+
             "X|X|X|X|X|X|X|X|X|XX||",
             "X|X|X|X|X|X|X|X|X|XXX||",
             "5|X|X|X|X|X|X|X|X|X||",
@@ -223,7 +224,7 @@ public class BowlingTest {
 
 
     })
-    public void TestingInvalidInput(String turns) {
+    public void furtherTestingOfInvalidInputContainingStrikes(String turns) {
 
         Bowling game = new Bowling();
         Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
@@ -271,7 +272,7 @@ public class BowlingTest {
 
 
     })
-    public void testingValidInputNormalFrames(String turns) {
+    public void testingValidInputNormalFrames1to10(String turns) {
 
         Bowling game = new Bowling();
         Assertions.assertDoesNotThrow(() -> game.turns(turns));
