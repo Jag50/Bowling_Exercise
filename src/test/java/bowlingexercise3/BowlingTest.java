@@ -315,7 +315,7 @@ public class BowlingTest {
 
 
     })
-    public void testValidInputStrike(String turns) {
+    public void testValidInputStrikeNormal10Frames(String turns) {
 
         Bowling game = new Bowling();
         Assertions.assertDoesNotThrow(() -> game.turns(turns));
@@ -333,7 +333,7 @@ public class BowlingTest {
 
 
     })
-    public void testValidInputStrikeAndSpare(String turns) {
+    public void testValidInputStrikeAndSpareNormal10Frames(String turns) {
 
         Bowling game = new Bowling();
         Assertions.assertDoesNotThrow(() -> game.turns(turns));
