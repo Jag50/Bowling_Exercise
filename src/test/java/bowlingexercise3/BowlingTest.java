@@ -13,6 +13,19 @@ public class BowlingTest {
 
     @ParameterizedTest
     @CsvSource(value = {
+
+    })
+
+
+
+    public void testCommandPrompt(String turns, int score) {
+        Bowling game = new Bowling();
+        game.turns(turns);
+        assertEquals(score, game.score());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
             //Some combinations of numbers to 10
             "--|--|--|--|--|--|--|--|--|--||, 0",
             "1-|--|--|--|--|--|--|--|--|--||, 1",
@@ -26,6 +39,8 @@ public class BowlingTest {
             "45|--|--|--|--|--|--|--|--|--||, 9",
             "44|2-|--|--|--|--|--|--|--|--||, 10"
     })
+
+
 
     public void testBowling1to9(String turns, int score) {
         Bowling game = new Bowling();
