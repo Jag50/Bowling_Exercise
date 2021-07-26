@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.EmptySource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//branch from master and making changes, another branch merging into master where changing lines of code in the same place, see what  happens
 
 public class BowlingTest {
 
@@ -141,7 +142,7 @@ public class BowlingTest {
             "--|--|--|--|--|--|--|--|--|-/||5",
     })
 
-    public void boundaryConditionsSpareBonusBallTest(String turns) {
+    public void assertValidInputForSpareBonusBallTest(String turns) {
         Bowling game = new Bowling();
         Assertions.assertDoesNotThrow(() -> game.turns(turns));
     }
