@@ -17,8 +17,6 @@ public class Bowling {
     private static String REGEX_VALID_FULL = REGEX_SPARES_STRIKES + "(" + REGEX_BONUS + "|" + REGEX_BONUS_SPARE + "|" + REGEX_BONUS_STRIKE + ")";
     private static Pattern REGEX_VALID_EXP = Pattern.compile(REGEX_VALID_FULL);
 
-
-
     //Private Boolean created to keep track of pointers which correctly add scores
     private boolean strike(int cursor) {
         return turns[cursor] == 10;
@@ -32,7 +30,6 @@ public class Bowling {
     public void turns(String total) throws IllegalArgumentException {
 
         validateInput(total);
-
 
         for (int i = 0; i < total.length(); i++) {
             //Incorporates the addition of a Strike (/) symbol
