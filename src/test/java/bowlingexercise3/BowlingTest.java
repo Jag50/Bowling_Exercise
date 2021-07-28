@@ -8,8 +8,6 @@ import org.junit.jupiter.params.provider.EmptySource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-//branch from master and making changes, another branch merging into master where changing lines of code in the same place, see what  happens
-
 public class BowlingTest {
 
     @ParameterizedTest
@@ -363,7 +361,6 @@ public class BowlingTest {
             "X|X|X|X|X|X|X|X|X|X||9/",
             "X|X|X|X|X|X|X|X|X|X||--",
             "X|X|X|X|X|X|X|X|X|X||-/",
-
     })
 
     public void testValidInputBonusStrike(String turns) {

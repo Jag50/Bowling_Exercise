@@ -9,14 +9,14 @@ public class BowlingApplication {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to 10 Pin Bowling! " +
-                "Please enter game score in String format: ");
+                "Please enter game score in String format: \n");
 
         String score = scanner.nextLine();
-
         Bowling game = new Bowling();
         game.turns(score);
 
-        System.out.println("The String is: " + game.score());
-
+        System.out.println("The total score for this game is: \n");
+        System.out.println(game.score());
     }
 }
+
