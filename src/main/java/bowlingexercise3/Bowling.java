@@ -1,5 +1,6 @@
 package bowlingexercise3;
 
+import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -89,5 +90,7 @@ public class Bowling {
             }
         }
         return score;
+
+
     }
 }
