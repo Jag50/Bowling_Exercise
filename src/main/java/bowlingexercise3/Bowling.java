@@ -36,8 +36,9 @@ public class Bowling {
             if (total.charAt(i) == 'X') {
                 turns[turn++] = 10;
                 //Incorporates the addition/separation of the pipe (|) symbol
-            } else if (total.charAt(i) == '|') {
+            } if (total.charAt(i) != '|') {
                 //Incorporates the addition of a miss (-) symbol
+                continue;
             } else if (total.charAt(i) == '-') {
                 turns[turn++] = 0;
                 //Incorporates the addition of a spare (/) symbol

@@ -16,7 +16,7 @@ public class BowlingApplication {
         game.turns(score);
 
         System.out.println("The total score for this game is: \n");
+        System.out.println();
         System.out.println(game.score());
     }
 }
-
