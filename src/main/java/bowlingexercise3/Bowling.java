@@ -51,7 +51,6 @@ public class Bowling {
                 turns[turn++] = x - '0';
             }
         }
-
     }
 
     private void validateInput(String input) throws IllegalArgumentException {
@@ -59,10 +58,8 @@ public class Bowling {
         Matcher matcherInput = REGEX_VALID_EXP.matcher(input);
 
         if (!matcherInput.matches()) {
-
             throw new IllegalArgumentException("Input isn't valid");
         }
-
     }
 
     //Keeps the overall score
