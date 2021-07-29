@@ -19,11 +19,16 @@ public class BowlingApplication {
             System.out.println("Please enter game score in String format: \n");
 
             String score = scanner.nextLine();
-            Bowling game = new Bowling();
-            game.turns(score);
+            try {
+                Bowling game = new Bowling();
+                game.turns(score);
 
-            System.out.println("The total score for this game is: \n");
-            System.out.println(game.score());
+                System.out.println("The total score for this game is: \n");
+                System.out.println(game.score());
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+
             System.out.println();
             System.out.println("Press any key to continue, otherwise enter t to terminate: ");
 
