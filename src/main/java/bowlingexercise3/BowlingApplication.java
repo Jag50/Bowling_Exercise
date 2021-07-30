@@ -20,12 +20,12 @@ public class BowlingApplication {
 
             String score = scanner.nextLine();
             try {
-                Bowling game = new Bowling();
+                Method game = new Method();
                 game.turns(score);
 
                 System.out.println("The total score for this game is: \n");
                 System.out.println(game.score());
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
 
