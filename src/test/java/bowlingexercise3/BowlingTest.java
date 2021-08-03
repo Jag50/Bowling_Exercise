@@ -6,10 +6,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BowlingTest {
-
-    private Bowling game = new Bowling();
 
     @ParameterizedTest
     @CsvSource(value = {
@@ -28,7 +27,7 @@ public class BowlingTest {
     })
 
     public void testBowling1to9(String turns, int score) {
-
+        Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());
     }
@@ -49,6 +48,7 @@ public class BowlingTest {
     })
 
     public void testBowlingScore10AndMoreInNormal10Frames(String turns, int score) {
+        Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());
     }
@@ -71,6 +71,7 @@ public class BowlingTest {
     })
 
     public void testBowlingSparesFramesOneToNine(String turns, int score) {
+        Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());
     }
@@ -93,6 +94,7 @@ public class BowlingTest {
     })
 
     public void testBowlingStrikesFramesOneToNine(String turns, int score) {
+        Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());
     }
@@ -115,6 +117,7 @@ public class BowlingTest {
     })
 
     public void testBowlingStrikeSpareScoreBonusFrames(String turns, int score) {
+        Bowling game = new Bowling();
         game.turns(turns);
         assertEquals(score, game.score());
     }
@@ -196,9 +199,6 @@ public class BowlingTest {
         Bowling game = new Bowling();
         Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
         assertEquals("Input isn't valid", e.getMessage());
-    }
-
-    private Exception assertThrows(Class<IllegalArgumentException> illegalArgumentExceptionClass, Object o) {
     }
 
     @ParameterizedTest
