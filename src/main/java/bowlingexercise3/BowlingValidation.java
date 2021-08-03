@@ -3,7 +3,7 @@ package bowlingexercise3;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Bowling {
+public class BowlingValidation {
 
     // Regular Expressions
     private static String REGEX_SPARES_STRIKES = "(([-1-9][-1-9/]|[X])\\|){10}\\|";

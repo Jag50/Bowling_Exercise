@@ -5,9 +5,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MethodTest {
+public class BowlingGameTest {
 
-    private Method game = new Method();
+    private BowlingGame game = new BowlingGame();
 
     @ParameterizedTest
     @CsvSource(value = {

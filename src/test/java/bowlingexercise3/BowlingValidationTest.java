@@ -8,9 +8,9 @@ import org.junit.jupiter.params.provider.EmptySource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BowlingTest {
+public class BowlingValidationTest {
 
-    private Method game = new Method();
+    private BowlingGame game = new BowlingGame();
 
     @ParameterizedTest
     @CsvSource(value = {

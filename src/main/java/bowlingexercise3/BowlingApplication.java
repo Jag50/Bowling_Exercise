@@ -14,13 +14,13 @@ public class BowlingApplication {
 
             Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Welcome to 10 Pin Bowling!");
+            System.out.println("Welcome to 10 Pin BowlingValidation!");
             System.out.println();
             System.out.println("Please enter game score in String format: \n");
 
             String score = scanner.nextLine();
             try {
-                Method game = new Method();
+                BowlingGame game = new BowlingGame();
                 game.turns(score);
 
                 System.out.println("The total score for this game is: \n");
@@ -41,7 +41,7 @@ public class BowlingApplication {
             System.out.println("\n");
 
             if (press == 't' | press == 'T') {
-                System.out.println("Game Will Now Terminate......Thank You For Playing 10 Pin Bowling");
+                System.out.println("Game Will Now Terminate......Thank You For Playing 10 Pin BowlingValidation");
                 break;
             }
         }
