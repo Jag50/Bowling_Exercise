@@ -8,8 +8,6 @@ import org.junit.jupiter.params.provider.EmptySource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-//branch from master and making changes, another branch merging into master where changing lines of code in the same place, see what  happens
-
 public class BowlingTest {
 
     @ParameterizedTest
@@ -147,7 +145,6 @@ public class BowlingTest {
         Assertions.assertDoesNotThrow(() -> game.turns(turns));
     }
 
-
     @ParameterizedTest
     @CsvSource(value = {
 
@@ -208,8 +205,6 @@ public class BowlingTest {
     @EmptySource
     @CsvSource(value = {
 
-
-
             "X|X|X|X|X|X|X|X|X|XX||",
             "X|X|X|X|X|X|X|X|X|XXX||",
             "5|X|X|X|X|X|X|X|X|X||",
@@ -221,7 +216,6 @@ public class BowlingTest {
             "9|X|X|X|X|X|X|X|X|X||",
             "/X|X|X|X|X|X|X|X|X|X||",
             "-/|X|X|X|X|X|X|X|X|X||-X",
-
 
     })
     public void furtherTestingOfInvalidInputContainingStrikes(String turns) {
@@ -269,8 +263,6 @@ public class BowlingTest {
             "8/|8/|8/|8/|8/|8/|8/|8/|8/|8/||",
             "9/|9/|9/|9/|9/|9/|9/|9/|9/|9/||",
 
-
-
     })
     public void testingValidInputNormalFrames1to10(String turns) {
 
@@ -294,7 +286,6 @@ public class BowlingTest {
             "9/|9/|9/|9/|9/|9/|9/|9/|9/|9/||-",
             "1/|1/|3/|4/|5/|6/|7/|7/|8/|9/||-",
 
-
     })
     public void testValidInputSpareBonus(String turns) {
 
@@ -312,8 +303,6 @@ public class BowlingTest {
             "X|12|23|X|X|X|9-|X|X|61||",
             "X|11|11|11|11|11|11|11|X|81||",
 
-
-
     })
     public void testValidInputStrikeNormal10Frames(String turns) {
 
@@ -330,7 +319,6 @@ public class BowlingTest {
             "X|-/|54|-/|X|-/|X|-/|X|--||",
             "X|-/|1/|-/|X|-/|X|-/|X|--||",
             "X|-/|X|-/|X|9/|X|-/|X|--||",
-
 
     })
     public void testValidInputStrikeAndSpareNormal10Frames(String turns) {
@@ -373,10 +361,8 @@ public class BowlingTest {
             "X|X|X|X|X|X|X|X|X|X||9/",
             "X|X|X|X|X|X|X|X|X|X||--",
             "X|X|X|X|X|X|X|X|X|X||-/",
-
-
-
     })
+
     public void testValidInputBonusStrike(String turns) {
 
         Bowling game = new Bowling();
@@ -408,7 +394,6 @@ public class BowlingTest {
             "9/|9/|9/|9/|9/|9/|9/|9/|9/|9/||:",
             "1/|1/|3/|4/|5/|6/|7/|7/|8/|9/||X4",
 
-
     })
     public void testInvalidInputBonusFrames(String turns) {
 
@@ -416,6 +401,4 @@ public class BowlingTest {
         Exception e = assertThrows(IllegalArgumentException.class, () -> game.turns(turns));
         assertEquals("Input isn't valid", e.getMessage());
     }
-
 }
-
