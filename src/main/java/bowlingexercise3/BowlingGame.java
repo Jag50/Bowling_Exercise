@@ -17,7 +17,8 @@ public class BowlingGame {
     }
 
     private boolean spare(int cursor) {
-        return turns.get(cursor).getScore() + turns.get(cursor + 1).getScore() == 10;
+
+        return turns.get(cursor + 1).isSpare();
     }
 
 
@@ -25,30 +26,10 @@ public class BowlingGame {
 
         BowlingValidation.validateInput(total);
 
-        for (int i = 0; i < total.length(); i++) {
-            //Incorporates the addition of a Strike (/) symbol
-            if (total.charAt(i) == 'X') {
-                turns.add(new Ball(10));
-                turn++;
-                //Incorporates the addition/separation of the pipe (|) symbol
-            } else if (total.charAt(i) == '|') {
-                //Incorporates the addition of a miss (-) symbol
-            } else if (total.charAt(i) == '-') {
-                turns.add(new Ball(0));
-                turn++;
-                //Incorporates the addition of a spare (/) symbol
-            } else if (total.charAt(i) == '/') {
-                int diff = 10 - (turns.get(turn - 1).getScore());
-                //turns[turn++] = diff;
-                turns.add(new Ball(diff));
-                turn++;
-            }
-            //Ensures numbers are added corrected
-            else {
-                int x = total.charAt(i);
-                turns.add(new Ball(x - '0'));
-                turn++;
-//                turns.get(turns.size() - 2).getScore();
+        turns.add(Ball.createBall(total.charAt(0), 0));
+        for (int i = 1; i < total.length(); i++) {
+            if (total.charAt(i) != '|') {
+                turns.add(Ball.createBall(total.charAt(i), turns.get(turns.size() - 1).getScore()));
             }
         }
     }
@@ -74,6 +55,7 @@ public class BowlingGame {
                 score += turns.get(cursor).getScore() + turns.get(cursor + 1).getScore();
                 cursor += 2;
             }
+//            System.out.println("score="+score + " cursor="+cursor + " score at cursor="+turns.get(cursor).getScore());
         }
         return score;
     }
