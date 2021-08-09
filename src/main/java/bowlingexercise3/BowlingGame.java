@@ -5,7 +5,6 @@ import java.util.List;
 
 public class BowlingGame {
 
-
     //Determines the number of rolls and limits the frames to 10
     private int turn = 0;
     //limits the frames
@@ -20,7 +19,6 @@ public class BowlingGame {
 
         return turns.get(cursor + 1).isSpare();
     }
-
 
     public void turns(String total) throws IllegalArgumentException {
 
@@ -55,9 +53,7 @@ public class BowlingGame {
                 score += turns.get(cursor).getScore() + turns.get(cursor + 1).getScore();
                 cursor += 2;
             }
-//            System.out.println("score="+score + " cursor="+cursor + " score at cursor="+turns.get(cursor).getScore());
         }
         return score;
     }
 }
-

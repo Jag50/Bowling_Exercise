@@ -13,7 +13,6 @@ public class BowlingValidation {
     private static String REGEX_VALID_FULL = REGEX_SPARES_STRIKES + "(" + REGEX_BONUS + "|" + REGEX_BONUS_SPARE + "|" + REGEX_BONUS_STRIKE + ")";
     private static Pattern REGEX_VALID_EXP = Pattern.compile(REGEX_VALID_FULL);
 
-
     public static void validateInput(String input) throws IllegalArgumentException {
 
         Matcher matcherInput = REGEX_VALID_EXP.matcher(input);
