@@ -1,45 +1,33 @@
 package bowlingexercise3;
 
-public class BowlingGame {
+import java.util.ArrayList;
+import java.util.List;
 
+public class BowlingGame {
 
     //Determines the number of rolls and limits the frames to 10
     private int turn = 0;
     //limits the frames
-    private int[] turns = new int[24];
+    private List<Ball> turns = new ArrayList<>();
 
     //Private Boolean created to keep track of pointers which correctly add scores
     private boolean strike(int cursor) {
-        return turns[cursor] == 10;
+        return turns.get(cursor).isStrike();
     }
 
     private boolean spare(int cursor) {
-        return turns[cursor] + turns[cursor + 1] == 10;
-    }
 
+        return turns.get(cursor + 1).isSpare();
+    }
 
     public void turns(String total) throws IllegalArgumentException {
 
         BowlingValidation.validateInput(total);
 
-        for (int i = 0; i < total.length(); i++) {
-            //Incorporates the addition of a Strike (/) symbol
-            if (total.charAt(i) == 'X') {
-                turns[turn++] = 10;
-                //Incorporates the addition/separation of the pipe (|) symbol
-            } else if (total.charAt(i) == '|') {
-                //Incorporates the addition of a miss (-) symbol
-            } else if (total.charAt(i) == '-') {
-                turns[turn++] = 0;
-                //Incorporates the addition of a spare (/) symbol
-            } else if (total.charAt(i) == '/') {
-                int diff = 10 - turns[turn - 1];
-                turns[turn++] = diff;
-            }
-            //Ensures numbers are added corrected
-            else {
-                int x = total.charAt(i);
-                turns[turn++] = x - '0';
+        turns.add(Ball.createBall(total.charAt(0), 0));
+        for (int i = 1; i < total.length(); i++) {
+            if (total.charAt(i) != '|') {
+                turns.add(Ball.createBall(total.charAt(i), turns.get(turns.size() - 1).getScore()));
             }
         }
     }
@@ -56,13 +44,13 @@ public class BowlingGame {
         for (int frame = 0; frame < 10; frame++) {
 
             if (strike(cursor)) {
-                score += 10 + turns[cursor + 1] + turns[cursor + 2];
+                score += 10 + turns.get(cursor + 1).getScore() + turns.get(cursor + 2).getScore();
                 cursor++;
             } else if (spare(cursor)) {
-                score += 10 + turns[cursor + 2];
+                score += 10 + turns.get(cursor + 2).getScore();
                 cursor += 2;
             } else {
-                score += turns[cursor] + turns[cursor + 1];
+                score += turns.get(cursor).getScore() + turns.get(cursor + 1).getScore();
                 cursor += 2;
             }
         }
